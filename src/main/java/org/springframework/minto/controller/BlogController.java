@@ -1,6 +1,10 @@
 package org.springframework.minto.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.minto.model.Blog;
 import org.springframework.minto.repository.BlogRepository;
 import org.springframework.http.HttpStatus;
@@ -12,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("api/v1")
@@ -24,9 +29,11 @@ public class BlogController {
 
     @GetMapping("/blogs")
     @ApiOperation(value = "get blog", response = Blog.class)
-    public List<Blog> findAll() {
-        return (List<Blog>) blogRepository.findAll();
+    public List<Blog> findAll(Pageable pageable) {
+        return blogRepository.findAll(pageable).toList();
     }
+
+
 
     @PostMapping("/blog")
     @ApiOperation(value = "post blog", response = Blog.class)

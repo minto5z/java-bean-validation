@@ -4,6 +4,8 @@
 This repository contains source code examples from various blog posts from 
 
 #Common Bean Validation Annotations
+#Swagger Configuration
+#Pagination with Pageable
 In addition to the validation annotations we used in the application, some other key JSR 303 (Bean Validation) are:
 
 **@AssertFalse** states that the value of the field or property must be false.<br/>
