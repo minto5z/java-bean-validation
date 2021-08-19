@@ -10,20 +10,26 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("api/v1")
+@Api(tags = "Blog Data")
+
 public class BlogController {
 
     @Autowired
     private BlogRepository blogRepository;
 
     @GetMapping("/blogs")
+    @ApiOperation(value = "get blog", response = Blog.class)
     public List<Blog> findAll() {
         return (List<Blog>) blogRepository.findAll();
     }
 
     @PostMapping("/blog")
+    @ApiOperation(value = "post blog", response = Blog.class)
     @ResponseStatus(HttpStatus.CREATED)
    public Blog saveBlog(@Valid @RequestBody Blog savedBlog) {
         return blogRepository.save(savedBlog);
